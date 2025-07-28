@@ -1,69 +1,105 @@
-Here’s a professional, full-featured `README.md` file tailored for your project **LegalGenie – AI-Powered Legal Assistant**, built with **React**, **Tailwind CSS**, and **LangChain** on the backend.
+Absolutely! Here's a **production-ready `README.md`** for your full-stack LangChain project **LegalGenie**, with full integration details, **real-time editing**, **semantic search**, and **Gemini** as the LLM provider.
 
 ---
 
-````markdown
-# ⚖️ LegalGenie – AI-Powered Legal Assistant
+```markdown
+# ⚖️ LegalGenie – AI-Powered Legal Assistant with LangChain, Gemini, and Realtime Editing
 
-LegalGenie is an intelligent, AI-powered web platform that assists users in understanding, analyzing, and generating legal documents. Built using **LangChain**, **React**, and **Tailwind CSS**, this project leverages the full power of large language models to provide clause-level insights, AI-generated suggestions, and interactive multi-agent workflows.
+**LegalGenie** is a full-stack web application that uses **LangChain**, **Gemini Pro LLM**, and a **rich text editor** to deliver real-time, AI-assisted legal document analysis, Q&A, red-flag detection, and intelligent rewriting of legal clauses.
 
----
-
-## 🚀 Features
-
-- 📄 Upload and analyze legal documents (PDF, DOCX, TXT)
-- 🔍 Ask natural-language questions about the document (RAG-based Q&A)
-- ✍️ Get clause-level rewrite suggestions (AI-powered)
-- 🧠 Agent-based multi-step legal analysis (risk detection, review, red flags)
-- 🧾 Auto-generate new legal documents from structured inputs
-- 🧵 Chat with memory (previous chats + document context)
-- 📤 Export reviewed documents with changes
+Built using **React**, **Tailwind CSS**, **FastAPI**, and **Pinecone**, the platform combines Retrieval-Augmented Generation (RAG), multi-agent workflows via LangGraph, and rich document editing—all in a seamless experience.
 
 ---
 
-## 🛠️ Tech Stack
+## 🧠 Core Features
 
-### Frontend
-- **React.js** – Component-based frontend
-- **Tailwind CSS** – Utility-first styling
-- **shadcn/ui** – For accessible and elegant UI components
-- **React Dropzone** – For file upload
-- **Tiptap / React Quill** – For rich-text editing
-
-### Backend
-- **LangChain (Python)** – LLM orchestration and chains
-- **FastAPI** – Lightweight, async backend API
-- **OpenAI / Anthropic** – LLM providers (GPT-4, Claude, etc.)
-- **Pinecone / Chroma / FAISS** – Vector database for semantic search
-- **LangGraph** – For multi-agent workflows
-
-### Database & Storage
-- **Supabase / Firebase** – User auth and document metadata
-- **Cloudinary / S3** – Document file storage
+- 📄 Upload legal documents (PDF, DOCX, TXT)
+- 🔍 Ask AI legal questions about your document (RAG-based Q&A)
+- ✍️ Real-time AI-assisted clause editing and rewriting
+- 🚨 Red flag detection (e.g. liability, vague terms)
+- 🧾 Auto-generate new documents (e.g. NDAs, MoUs)
+- 🔁 Editable rich-text interface with live updates
+- 🧠 Memory + multi-step review using LangGraph
+- 🌐 Gemini Pro as the primary LLM for all tasks
 
 ---
 
-## 🧠 LangChain Concepts Used
+## 🧱 Architecture Overview
 
-| Feature | LangChain Component |
-|--------|---------------------|
-| Document parsing | `DocumentLoaders`, `TextSplitters` |
-| Vector search | `FAISS`, `Pinecone`, or `Chroma` |
-| Q&A | `RetrievalQA`, `ConversationalRetrievalChain` |
-| Memory | `ConversationBufferMemory`, `VectorStoreRetrieverMemory` |
-| Clause rewriting | `LLMChain`, `PromptTemplate` |
-| Multi-step review | `LangGraph`, `RouterChain`, custom agents |
-| Agent tooling | `Toolkits`, `AgentExecutor`, custom tools |
-| Tracing & debugging | `LangSmith` |
+| Component | Tech |
+|----------|------|
+| 💻 Frontend | React + Tailwind + shadcn/ui + Tiptap Editor |
+| 🔧 Backend | FastAPI + LangChain |
+| 🧠 LLM | Gemini Pro (via Vertex AI or API) |
+| 📁 Storage | Supabase / Firebase |
+| 📦 Vector DB | Pinecone (chunked semantic retrieval) |
+| 🔐 Auth | Supabase / Firebase Auth |
 
 ---
 
-## 📦 Installation
+## 🔄 Real-Time Editing + Semantic Search Explained
 
-### 🔹 1. Clone the Repository
+### 🧠 Why Pinecone + DB?
+
+LegalGenie stores the **same document in two forms**:
+
+| Use Case | Where It’s Stored | Format |
+|----------|-------------------|--------|
+| AI Search / RAG | Pinecone | Text chunks as embeddings |
+| Editing / Display | Firestore / Supabase | Full plain text |
+
+### 🔄 Workflow
+
+1. User uploads a document
+2. Backend splits it into chunks → sends to Pinecone
+3. Full document text stored in DB
+4. React loads full text in a rich editor (Tiptap)
+5. User edits document and uses AI to:
+   - Ask questions (uses Pinecone chunks)
+   - Rewrite clauses (sends selected text to LLM)
+6. Saved edits update full doc in DB and (optionally) update chunks in Pinecone
+
+---
+
+## 🌐 LangChain + Gemini Use Cases
+
+| Task | LangChain Tools |
+|------|-----------------|
+| Q&A on documents | `ConversationalRetrievalChain` + `Gemini` |
+| Clause rewriting | `LLMChain` + `PromptTemplate` |
+| Red flag analysis | `LangGraph` multi-agent pipeline |
+| Clause generation | `Tool` + `GeminiFunctionCall` |
+| Multi-step reviews | `StateGraph`, `ConditionalEdges` |
+| Tracing & logging | LangSmith (optional) |
+
+---
+
+## 📁 Project Structure
+
+```
+
+legalgenie/
+├── client/            # React + Tailwind frontend
+│   ├── components/
+│   ├── pages/
+│   └── utils/
+├── backend/           # FastAPI + LangChain backend
+│   ├── routes/
+│   ├── agents/
+│   └── langgraph/
+├── docs/              # Screenshots, diagrams
+└── README.md
+
+````
+
+---
+
+## 🚀 Quickstart
+
+### 🔹 1. Clone the Repo
 
 ```bash
-git clone https://github.com/yourusername/legalgenie.git
+git clone https://github.com/yourname/legalgenie.git
 cd legalgenie
 ````
 
@@ -75,12 +111,12 @@ npm install
 npm run dev
 ```
 
-### 🔹 3. Backend Setup (LangChain + FastAPI)
+### 🔹 3. Backend Setup
 
 ```bash
 cd backend
 python -m venv venv
-source venv/bin/activate  # or .\venv\Scripts\activate on Windows
+source venv/bin/activate
 pip install -r requirements.txt
 uvicorn main:app --reload
 ```
@@ -89,90 +125,102 @@ uvicorn main:app --reload
 
 ## 🔐 Environment Variables
 
-Create a `.env` file in both `client` and `backend` directories with the following:
+### `/client/.env`
 
-### 📁 `/client/.env`
-
-```
+```env
 VITE_API_URL=http://localhost:8000
+VITE_SUPABASE_URL=your_url
+VITE_SUPABASE_KEY=your_key
 ```
 
-### 📁 `/backend/.env`
+### `/backend/.env`
 
-```
-OPENAI_API_KEY=your_openai_key
+```env
+GOOGLE_API_KEY=your_gemini_api_key
 PINECONE_API_KEY=your_pinecone_key
-PINECONE_ENV=your_pinecone_environment
+PINECONE_ENVIRONMENT=your_pinecone_env
+PINECONE_INDEX_NAME=legalgenie-index
 ```
 
 ---
 
 ## 📸 Screenshots
 
-| Upload & Ask               | AI Rewriting                 |
-| -------------------------- | ---------------------------- |
-| ![upload](docs/upload.png) | ![rewrite](docs/rewrite.png) |
+| Rich Text Editing          | Q\&A Assistant     |
+| -------------------------- | ------------------ |
+| ![Editor](docs/editor.png) | ![QA](docs/qa.png) |
 
 ---
 
-## 🧪 Example Use Cases
+## 💡 Example Prompts
 
-* Review NDAs for hidden risks
-* Rewrite termination clauses to be more founder-friendly
-* Generate new contracts using guided AI forms
-* Simulate a lawyer-agent review pipeline
+* “What are the early termination clauses?”
+* “Rewrite the indemnification section to favor the employee.”
+* “Detect any ambiguous obligations.”
+* “Generate a basic NDA between a startup and a freelancer.”
 
 ---
 
-## 🧩 Folder Structure
+## 🔮 LangGraph Workflow Example
 
+```mermaid
+graph TD
+  A[Document Upload] --> B[Parse & Chunk]
+  B --> C[Risk Detection Agent]
+  C --> D{Risks Found?}
+  D -- Yes --> E[Clause Rewriter]
+  D -- No --> F[Summary Generator]
+  E --> F
+  F --> G[Send to Editor for Review]
 ```
-legalgenie/
-├── client/            # React + Tailwind frontend
-├── backend/           # FastAPI + LangChain backend
-├── docs/              # Screenshots, diagrams
-├── README.md
-```
+
+Each node is powered by a different LangChain agent using Gemini and custom tools.
 
 ---
 
-## 📌 Future Enhancements
+## 📌 Future Features
 
-* ✅ AI-powered clause comparison with industry standards
-* 🌐 Multilingual legal support
-* 🔊 Voice input (via Whisper API)
-* 📧 Automated alerts with n8n (e.g., high-risk clauses)
+* Voice-to-contract (Whisper + Gemini)
+* Clause similarity map
+* AI-generated negotiation suggestions
+* Multi-language contract support
+* Blockchain-stored signed contracts
 
 ---
 
-## 🤝 Contributing
+## 🙌 Contributing
 
-Pull requests and suggestions are welcome!
-Please open an issue first to discuss what you'd like to change.
+1. Fork the project
+2. Make changes
+3. Submit a PR
+
+We welcome all feature suggestions, bug reports, and improvements!
 
 ---
 
 ## 📜 License
 
-MIT License © 2025 \[Your Name]
+MIT © 2025 \[Your Name]
 
 ---
 
-## 🙌 Acknowledgments
+## 🧠 Acknowledgments
 
 * [LangChain](https://github.com/langchain-ai/langchain)
-* [OpenAI](https://openai.com/)
-* [shadcn/ui](https://ui.shadcn.com/)
+* [Gemini API](https://ai.google.dev/)
 * [Pinecone](https://www.pinecone.io/)
+* [Tiptap Editor](https://tiptap.dev/)
+* [shadcn/ui](https://ui.shadcn.com/)
 
 ```
 
 ---
 
-Let me know if you'd like:
-- A `requirements.txt` or `package.json`
-- A deployment-ready version (e.g., for Vercel + Railway)
-- Or branding (logo, favicon, etc.)
+Would you like me to generate:
+- 🧪 `requirements.txt` for backend (with LangChain + Gemini support)?
+- 📦 `package.json` sample for the frontend?
+- 🎨 Sample UI wireframes in Figma?
+- 📁 GitHub repo scaffold (frontend + backend folders)?
 
-Would you also like to publish this as a GitHub template repo for others to fork?
+Let me know what you need next!
 ```

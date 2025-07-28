@@ -3,6 +3,9 @@ import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import logo1 from "./assets/logo-vector-1.svg";
 import logo2 from "./assets/logo-vector-2.svg";
 import logo3 from "./assets/logo-vector-3.svg";
+import ScrollReveal from "./components/ScrollReveal";
+import ParallaxSection from "./components/ParallaxSection";
+import ScrollProgress from "./components/ScrollProgress";
 
 export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -12,7 +15,8 @@ export default function App() {
   };
 
   return (
-    <div className="bg-white min-h-screen w-full" style={{ fontFamily: "'Varela Round', system-ui, Avenir, Helvetica, Arial, sans-serif" }}>
+    <div className="bg-white min-h-screen w-full relative" style={{ fontFamily: "'Varela Round', system-ui, Avenir, Helvetica, Arial, sans-serif" }}>
+      <ScrollProgress />
       {/* Header */}
       <header className="flex justify-between items-center px-4 sm:px-6 lg:px-[100px] py-4 w-full bg-[#043873]">
         {/* Logo */}
@@ -145,75 +149,94 @@ export default function App() {
       </div>
 
       {/* Hero Section */}
-      <section className="relative px-4 sm:px-6 lg:px-[100px] pt-8 pb-16 lg:pb-32 bg-[#043873] min-h-screen">
-        <div className="max-w-2xl pt-20 lg:pt-40">
-          <h1 className="text-4xl sm:text-6xl lg:text-8xl font-bold text-white mb-6 lg:mb-8 leading-tight">AI-Powered Legal Document Analysis</h1>
-          <p className="text-lg sm:text-xl lg:text-2xl text-white/80 mb-8 lg:mb-12 leading-relaxed">
-            Advanced legal document analyzer with AI that helps lawyers and legal professionals review, analyze, and extract insights from contracts, agreements, and legal documents
-          </p>
-          <button className="bg-[#4F9CF9] text-white px-6 sm:px-8 lg:px-10 py-4 sm:py-5 lg:py-6 rounded-lg font-semibold text-lg sm:text-xl flex items-center gap-3 w-full sm:w-auto justify-center">
-            Try LegalFlow free
-            <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
-              <path d="M0 5H10M5 0L10 5L5 10" stroke="white" strokeWidth="1"/>
-            </svg>
-          </button>
-        </div>
-        <div className="absolute top-1/2 right-4 sm:right-8 lg:right-[50px] transform -translate-y-1/2 hidden lg:block">
-          <DotLottieReact
-            src="https://lottie.host/2c1ecfe7-4da8-4f16-97b3-c7547b084cbd/b3HErlx4hk.lottie"
-            loop={false}
-            autoplay
-            style={{ width: '700px', height: '700px' }}
-          />
+      <section className="relative px-4 sm:px-6 lg:px-[100px] pt-8 pb-16 lg:pb-32 bg-[#043873] min-h-screen overflow-hidden">
+        <ParallaxSection background className="absolute inset-0">
+          <div className="absolute inset-0 bg-gradient-to-br from-[#043873] via-[#1E3A8A] to-[#043873] opacity-90"></div>
+        </ParallaxSection>
+        
+        <div className="relative z-10">
+          <ScrollReveal direction="up" delay={200}>
+            <div className="max-w-2xl pt-20 lg:pt-40">
+              <h1 className="text-4xl sm:text-6xl lg:text-8xl font-bold text-white mb-6 lg:mb-8 leading-tight animate-fade-in-up">AI-Powered Legal Document Analysis</h1>
+              <p className="text-lg sm:text-xl lg:text-2xl text-white/80 mb-8 lg:mb-12 leading-relaxed animate-fade-in-up stagger-1">
+                Advanced legal document analyzer with AI that helps lawyers and legal professionals review, analyze, and extract insights from contracts, agreements, and legal documents
+              </p>
+              <button className="bg-[#4F9CF9] text-white px-6 sm:px-8 lg:px-10 py-4 sm:py-5 lg:py-6 rounded-lg font-semibold text-lg sm:text-xl flex items-center gap-3 w-full sm:w-auto justify-center hover-lift animate-fade-in-up stagger-2">
+                Try LegalFlow free
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                  <path d="M0 5H10M5 0L10 5L5 10" stroke="white" strokeWidth="1"/>
+                </svg>
+              </button>
+            </div>
+          </ScrollReveal>
+          
+          <ParallaxSection speed={0.3} className="absolute top-1/2 right-0 lg:right-[-100px] transform -translate-y-1/2 hidden lg:block">
+            <DotLottieReact
+              src="https://lottie.host/2c1ecfe7-4da8-4f16-97b3-c7547b084cbd/b3HErlx4hk.lottie"
+              loop={false}
+              autoplay
+              style={{ width: '700px', height: '700px' }}
+            />
+          </ParallaxSection>
         </div>
       </section>
 
       {/* AI Document Analysis Section */}
       <section className="flex flex-col lg:flex-row items-center justify-between px-4 sm:px-6 lg:px-[220px] py-16 bg-white">
-        <div className="flex-1 flex items-center justify-center mb-8 lg:mb-0">
-          <img src="/20943399.jpg" alt="Legal Document Analysis" className="max-w-full h-auto w-full lg:w-auto" style={{ maxHeight: '400px', maxWidth: '100%' }} />
-        </div>
-        <div className="flex-1 max-w-2xl lg:ml-32 text-center lg:text-left">
-          <div className="w-16 h-16 bg-[#FFE492] rounded-lg mb-6 flex items-center justify-center mx-auto lg:mx-0">
-            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-              <path d="M8 8H24M8 16H24M8 24H16" stroke="#043873" strokeWidth="2"/>
-            </svg>
+        <ScrollReveal direction="left" delay={100}>
+          <div className="flex-1 flex items-center justify-center mb-8 lg:mb-0">
+            <img src="/20943399.jpg" alt="Legal Document Analysis" className="max-w-full h-auto w-full lg:w-auto hover-lift" style={{ maxHeight: '400px', maxWidth: '100%' }} />
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#212529] mb-6">AI-Powered Document Analysis</h2>
-          <p className="text-base sm:text-lg text-[#212529]/70 mb-8 leading-relaxed">
-            Upload contracts, agreements, and legal documents. Our AI instantly analyzes key terms, identifies risks, extracts important clauses, and provides comprehensive insights to streamline your legal review process.
-          </p>
-          <button className="bg-[#4F9CF9] text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg flex items-center gap-2 mx-auto lg:mx-0">
-            Analyze Document
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-              <path d="M0 7H14M7 0L14 7L7 14" stroke="white" strokeWidth="1"/>
-            </svg>
-          </button>
-        </div>
+        </ScrollReveal>
+        
+        <ScrollReveal direction="right" delay={300}>
+          <div className="flex-1 max-w-2xl lg:ml-32 text-center lg:text-left">
+            <div className="w-16 h-16 bg-[#FFE492] rounded-lg mb-6 flex items-center justify-center mx-auto lg:mx-0 animate-scale-in">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                <path d="M8 8H24M8 16H24M8 24H16" stroke="#043873" strokeWidth="2"/>
+              </svg>
+            </div>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#212529] mb-6 animate-fade-in-up">AI-Powered Document Analysis</h2>
+            <p className="text-base sm:text-lg text-[#212529]/70 mb-8 leading-relaxed animate-fade-in-up stagger-1">
+              Upload contracts, agreements, and legal documents. Our AI instantly analyzes key terms, identifies risks, extracts important clauses, and provides comprehensive insights to streamline your legal review process.
+            </p>
+            <button className="bg-[#4F9CF9] text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg flex items-center gap-2 mx-auto lg:mx-0 hover-lift animate-fade-in-up stagger-2">
+              Analyze Document
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <path d="M0 7H14M7 0L14 7L7 14" stroke="white" strokeWidth="1"/>
+              </svg>
+            </button>
+          </div>
+        </ScrollReveal>
       </section>
 
       {/* Work Together Section */}
       <section className="flex flex-col-reverse lg:flex-row items-center justify-between px-4 sm:px-6 lg:px-[220px] py-16 bg-white">
-        <div className="flex-1 max-w-2xl text-center lg:text-left mt-8 lg:mt-0">
-          <div className="w-16 h-16 bg-[#FFE492] rounded-lg mb-6 flex items-center justify-center mx-auto lg:mx-0">
-            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-              <path d="M16 8C18.21 8 20 6.21 20 4C20 1.79 18.21 0 16 0C13.79 0 12 1.79 12 4C12 6.21 13.79 8 16 8ZM24 12C26.21 12 28 10.21 28 8C28 5.79 26.21 4 24 4C21.79 4 20 5.79 20 8C20 10.21 21.79 12 24 12ZM8 12C10.21 12 12 10.21 12 8C12 5.79 10.21 4 8 4C5.79 4 4 5.79 4 8C4 10.21 5.79 12 8 12Z" fill="#043873"/>
-            </svg>
+        <ScrollReveal direction="left" delay={200}>
+          <div className="flex-1 max-w-2xl text-center lg:text-left mt-8 lg:mt-0">
+            <div className="w-16 h-16 bg-[#FFE492] rounded-lg mb-6 flex items-center justify-center mx-auto lg:mx-0 animate-scale-in">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                <path d="M16 8C18.21 8 20 6.21 20 4C20 1.79 18.21 0 16 0C13.79 0 12 1.79 12 4C12 6.21 13.79 8 16 8ZM24 12C26.21 12 28 10.21 28 8C28 5.79 26.21 4 24 4C21.79 4 20 5.79 20 8C20 10.21 21.79 12 24 12ZM8 12C10.21 12 12 10.21 12 8C12 5.79 10.21 4 8 4C5.79 4 4 5.79 4 8C4 10.21 5.79 12 8 12Z" fill="#043873"/>
+              </svg>
+            </div>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#212529] mb-6 animate-fade-in-up">Legal Team Collaboration</h2>
+            <p className="text-base sm:text-lg text-[#212529]/70 mb-8 leading-relaxed animate-fade-in-up stagger-1">
+              Enable seamless collaboration among legal teams with secure document sharing, real-time annotations, and version control. Share insights and analysis with colleagues while maintaining data security and compliance.
+            </p>
+            <button className="bg-[#4F9CF9] text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg flex items-center gap-2 mx-auto lg:mx-0 hover-lift animate-fade-in-up stagger-2">
+              Collaborate Now
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <path d="M0 7H14M7 0L14 7L7 14" stroke="white" strokeWidth="1"/>
+              </svg>
+            </button>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#212529] mb-6">Legal Team Collaboration</h2>
-          <p className="text-base sm:text-lg text-[#212529]/70 mb-8 leading-relaxed">
-            Enable seamless collaboration among legal teams with secure document sharing, real-time annotations, and version control. Share insights and analysis with colleagues while maintaining data security and compliance.
-          </p>
-          <button className="bg-[#4F9CF9] text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg flex items-center gap-2 mx-auto lg:mx-0">
-            Collaborate Now
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-              <path d="M0 7H14M7 0L14 7L7 14" stroke="white" strokeWidth="1"/>
-            </svg>
-          </button>
-        </div>
-        <div className="flex-1 flex items-center justify-center lg:ml-16">
-          <img src="/GeneratedImageJuly262025-10_46PM.jpeg" alt="Legal Collaboration" className="max-w-full h-auto w-full lg:w-auto" style={{ maxHeight: '400px', maxWidth: '100%' }} />
-        </div>
+        </ScrollReveal>
+        
+        <ScrollReveal direction="right" delay={400}>
+          <div className="flex-1 flex items-center justify-center lg:ml-16">
+            <img src="/GeneratedImageJuly262025-10_46PM.jpeg" alt="Legal Collaboration" className="max-w-full h-auto w-full lg:w-auto hover-lift" style={{ maxHeight: '400px', maxWidth: '100%' }} />
+          </div>
+        </ScrollReveal>
       </section>
 
       {/* Customise Section */}
@@ -281,19 +304,22 @@ export default function App() {
 
       {/* Pricing Section */}
       <section className="flex flex-col items-center px-4 sm:px-6 lg:px-[220px] py-16 lg:py-32 bg-white">
-        <div className="w-16 h-16 bg-[#FFE492] rounded-lg mb-6 flex items-center justify-center">
-          <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-            <path d="M16 4L18.5 11.5L26 14L18.5 16.5L16 24L13.5 16.5L6 14L13.5 11.5L16 4Z" fill="#043873"/>
-          </svg>
-        </div>
-        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#212529] mb-6 text-center">Choose Your LegalFlow Plan</h2>
-        <p className="text-base sm:text-lg text-[#212529]/70 mb-16 max-w-2xl text-center leading-relaxed">
-          Whether you're a solo practitioner, law firm, or corporate legal department, LegalFlow has the perfect plan to streamline your document analysis and legal workflows.
-        </p>
+        <ScrollReveal direction="up" delay={100}>
+          <div className="w-16 h-16 bg-[#FFE492] rounded-lg mb-6 flex items-center justify-center animate-scale-in">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+              <path d="M16 4L18.5 11.5L26 14L18.5 16.5L16 24L13.5 16.5L6 14L13.5 11.5L16 4Z" fill="#043873"/>
+            </svg>
+          </div>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#212529] mb-6 text-center animate-fade-in-up">Choose Your LegalFlow Plan</h2>
+          <p className="text-base sm:text-lg text-[#212529]/70 mb-16 max-w-2xl text-center leading-relaxed animate-fade-in-up stagger-1">
+            Whether you're a solo practitioner, law firm, or corporate legal department, LegalFlow has the perfect plan to streamline your document analysis and legal workflows.
+          </p>
+        </ScrollReveal>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-6xl">
           {/* Free Plan */}
-          <div className="border border-[#FFE492] rounded-lg p-8 bg-white">
+          <ScrollReveal direction="up" delay={200}>
+            <div className="border border-[#FFE492] rounded-lg p-8 bg-white hover-lift">
             <h3 className="text-2xl font-semibold text-[#212529] mb-4">Starter</h3>
             <div className="text-4xl font-bold text-[#212529] mb-4">$0</div>
             <p className="text-lg text-[#212529] mb-8">Perfect for solo practitioners and small firms</p>
@@ -319,9 +345,11 @@ export default function App() {
             </ul>
             <button className="w-full border border-[#FFE492] text-[#212529] py-4 rounded-lg font-semibold">Get Started</button>
           </div>
+          </ScrollReveal>
 
           {/* Personal Plan */}
-          <div className="bg-[#043873] rounded-lg p-8 shadow-lg">
+          <ScrollReveal direction="up" delay={400}>
+            <div className="bg-[#043873] rounded-lg p-8 shadow-lg hover-lift">
             <h3 className="text-2xl font-semibold text-white mb-4">Professional</h3>
             <div className="text-4xl font-bold text-[#FFE492] mb-4">$49.99</div>
             <p className="text-lg text-white mb-8">Ideal for growing law firms and legal teams</p>
@@ -347,9 +375,11 @@ export default function App() {
             </ul>
             <button className="w-full bg-[#4F9CF9] text-white py-4 rounded-lg font-semibold">Get Started</button>
           </div>
+          </ScrollReveal>
 
           {/* Organization Plan */}
-          <div className="border border-[#FFE492] rounded-lg p-8 bg-white">
+          <ScrollReveal direction="up" delay={600}>
+            <div className="border border-[#FFE492] rounded-lg p-8 bg-white hover-lift">
             <h3 className="text-2xl font-semibold text-[#212529] mb-4">Enterprise</h3>
             <div className="text-4xl font-bold text-[#212529] mb-4">$199.99</div>
             <p className="text-lg text-[#212529] mb-8">For large law firms and corporate legal departments</p>
@@ -375,6 +405,7 @@ export default function App() {
             </ul>
             <button className="w-full border border-[#FFE492] text-[#212529] py-4 rounded-lg font-semibold">Get Started</button>
           </div>
+          </ScrollReveal>
         </div>
       </section>
 
@@ -415,16 +446,19 @@ export default function App() {
 
       {/* Testimonials Section */}
       <section className="flex flex-col items-center px-4 sm:px-6 lg:px-[220px] py-16 lg:py-32 bg-white">
-        <div className="w-16 h-16 bg-[#FFE492] rounded-lg mb-6 flex items-center justify-center">
-          <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-            <path d="M16 4L18.5 11.5L26 14L18.5 16.5L16 24L13.5 16.5L6 14L13.5 11.5L16 4Z" fill="#043873"/>
-          </svg>
-        </div>
-        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#212529] mb-16 text-center">What Legal Professionals Say</h2>
+        <ScrollReveal direction="up" delay={100}>
+          <div className="w-16 h-16 bg-[#FFE492] rounded-lg mb-6 flex items-center justify-center animate-scale-in">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+              <path d="M16 4L18.5 11.5L26 14L18.5 16.5L16 24L13.5 16.5L6 14L13.5 11.5L16 4Z" fill="#043873"/>
+            </svg>
+          </div>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#212529] mb-16 text-center animate-fade-in-up">What Legal Professionals Say</h2>
+        </ScrollReveal>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-6xl">
           {/* Testimonial 1 */}
-          <div className="bg-white rounded-lg p-8 shadow-lg border border-gray-200">
+          <ScrollReveal direction="up" delay={200}>
+            <div className="bg-white rounded-lg p-8 shadow-lg border border-gray-200 hover-lift">
             <div className="mb-8">
               <svg width="40" height="30" viewBox="0 0 40 30" fill="none">
                 <path d="M10 0L20 15L10 30H0L10 15L0 0H10ZM30 0L40 15L30 30H20L30 15L20 0H30Z" fill="#043873"/>
@@ -443,9 +477,11 @@ export default function App() {
               </div>
             </div>
           </div>
+          </ScrollReveal>
 
           {/* Testimonial 2 */}
-          <div className="bg-[#043873] rounded-lg p-8 shadow-lg">
+          <ScrollReveal direction="up" delay={400}>
+            <div className="bg-[#043873] rounded-lg p-8 shadow-lg hover-lift">
             <div className="mb-8">
               <svg width="40" height="30" viewBox="0 0 40 30" fill="none">
                 <path d="M10 0L20 15L10 30H0L10 15L0 0H10ZM30 0L40 15L30 30H20L30 15L20 0H30Z" fill="white"/>
@@ -464,9 +500,11 @@ export default function App() {
               </div>
             </div>
           </div>
+          </ScrollReveal>
 
           {/* Testimonial 3 */}
-          <div className="bg-[#043873] rounded-lg p-8 shadow-lg">
+          <ScrollReveal direction="up" delay={600}>
+            <div className="bg-[#043873] rounded-lg p-8 shadow-lg hover-lift">
             <div className="mb-8">
               <svg width="40" height="30" viewBox="0 0 40 30" fill="none">
                 <path d="M10 0L20 15L10 30H0L10 15L0 0H10ZM30 0L40 15L30 30H20L30 15L20 0H30Z" fill="white"/>
@@ -485,6 +523,7 @@ export default function App() {
               </div>
             </div>
           </div>
+          </ScrollReveal>
         </div>
 
         {/* Slider Dots */}
@@ -497,17 +536,19 @@ export default function App() {
 
       {/* Free Trial Section */}
       <section className="flex flex-col items-center px-4 sm:px-6 lg:px-[220px] py-16 bg-[#043873] text-center">
-        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6">Try LegalFlow today</h2>
-        <p className="text-lg sm:text-xl text-white/80 mb-8 max-w-2xl leading-relaxed">
-          Get started for free. Add your whole team as your needs grow.
-        </p>
-        <button className="bg-[#4F9CF9] text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg flex items-center gap-2 mb-8 w-full sm:w-auto">
-          Try LegalFlow free
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-            <path d="M0 7H14M7 0L14 7L7 14" stroke="white" strokeWidth="1"/>
-          </svg>
-        </button>
-        <p className="text-lg sm:text-xl text-white/80">On a big team? Contact sales</p>
+        <ScrollReveal direction="up" delay={100}>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6 animate-fade-in-up">Try LegalFlow today</h2>
+          <p className="text-lg sm:text-xl text-white/80 mb-8 max-w-2xl leading-relaxed animate-fade-in-up stagger-1">
+            Get started for free. Add your whole team as your needs grow.
+          </p>
+          <button className="bg-[#4F9CF9] text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg flex items-center gap-2 mb-8 w-full sm:w-auto hover-lift animate-fade-in-up stagger-2 mx-auto">
+            Try LegalFlow free
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M0 7H14M7 0L14 7L7 14" stroke="white" strokeWidth="1"/>
+            </svg>
+          </button>
+          <p className="text-lg sm:text-xl text-white/80 animate-fade-in-up stagger-3">On a big team? Contact sales</p>
+        </ScrollReveal>
       </section>
 
       {/* Footer */}
